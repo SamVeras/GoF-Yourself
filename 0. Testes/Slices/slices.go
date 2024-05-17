@@ -41,4 +41,6 @@ func main() {
 
 	stringSliceInfo(q)
 
+	stringSliceInfo(q[0:2])
+
 }
