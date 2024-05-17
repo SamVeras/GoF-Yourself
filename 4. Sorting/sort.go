@@ -42,14 +42,61 @@ func SelectionSort(array []int) {
 	}
 }
 
-func MergeSort(array []int) {
+func Merge(array, left, right []int) {
+	var i, j, k int
+
+	// Merging
+	for i < len(left) && j < len(right) {
+		if left[i] < right[j] {
+			array[k] = left[i]
+			i++
+		} else {
+			array[k] = right[j]
+			j++
+		}
+		k++
+	}
+
+	// Copy what's left
+	for i < len(left) {
+		array[k] = left[i]
+		i++
+		k++
+	}
+
+	for j < len(right) {
+		array[k] = right[j]
+		j++
+		k++
+	}
 
 }
+
+func MergeSort(array []int) {
+	if len(array) <= 1 {
+		return
+	}
+
+	var q int = len(array) / 2
+
+	left := make([]int, len(array[:q]))
+	copy(left, array[:q])
+
+	right := make([]int, len(array[q:]))
+	copy(right, array[q:])
+
+	MergeSort(left)  // left
+	MergeSort(right) // right
+
+	Merge(array, left, right)
+}
+
 func main() {
 	n := []int{23, 4, 67, 9, 1221, 4, 80, 65, 33, 648, 90, 67, 8, 17, 64, 92, 11, 51, 172}
+
 	fmt.Println("Original:", n)
-	SelectionSort(n)
+
+	MergeSort(n)
 
 	fmt.Println("Sorted:  ", n)
-
 }
