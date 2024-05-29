@@ -2,6 +2,17 @@ package main
 
 import "fmt"
 
+func main() {
+	var v Stack
+	v.Push(23)
+	v.Push(33)
+	v.Push(44)
+	fmt.Println(v.IsEmpty())
+	v.Show()
+	fmt.Println(v.Size())
+
+}
+
 type SNode struct {
 	num  int
 	link *SNode
@@ -35,15 +46,33 @@ func (st *Stack) Top() (int, bool) {
 	return st.top.num, true
 }
 
-func main() {
-	var v Stack
-	v.Push(23)
+func (st *Stack) IsEmpty() (bool, bool) {
+	if st == nil {
+		return false, false
+	}
+	return st.top == nil, true
+}
 
-	fmt.Println(v.Pop())
-	fmt.Println(v.Pop())
-	v.Push(45)
-	fmt.Println(v.Top())
-	v.Push(12345)
-	fmt.Println(v.Top())
+func (st *Stack) Show() bool {
+	current := st.top
+	if current == nil {
+		return false
+	}
 
+	fmt.Print("{ ")
+	for current != nil {
+		fmt.Print(current.num)
+		if current.link != nil {
+			fmt.Print(", ")
+		}
+		current = current.link
+	}
+
+	fmt.Printf(" }\n")
+
+	return true
+}
+
+func (st *Stack) Size() int {
+	return st.size
 }
