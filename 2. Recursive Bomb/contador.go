@@ -6,7 +6,7 @@ import (
 )
 
 func contador(x int) {
-	if x == 0 {
+	if x <= 0 {
 		fmt.Println("BOOM!")
 		return
 	}
